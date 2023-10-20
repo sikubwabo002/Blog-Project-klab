@@ -9,6 +9,7 @@ import Signin from './pages/Signin'
 import Signup from './pages/Signup'
 import Dashboard from './pages/dashboard'
 import Readmore from './pages/readmore'
+import Viewblog from './pages/Viewblog'
 
 
 function App() {
@@ -25,6 +26,8 @@ function App() {
             <Route path='/Signup' element={<Signup />} />
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/readmore' element={<Readmore />} />
+            <Route path='/Viewblog' element={<Viewblog />} />
+
             
 
           </Routes>
