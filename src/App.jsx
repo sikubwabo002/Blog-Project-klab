@@ -3,7 +3,7 @@ import Aboutus from "./pages/Aboutus";
 import { Navbar } from "./pages/Navbar";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Footer } from "./component/Footer";
-import Contact from "./pages/contact";
+import Contact from "./pages/Contact";
 import Signin from "./pages/Signin";
 import Signup from "./pages/Signup";
 import Dashboard from "./pages/dashboard";
