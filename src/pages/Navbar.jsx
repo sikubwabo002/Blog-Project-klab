@@ -1,7 +1,7 @@
 import React from "react";
 import "./App.css";
-import { Link, useNavigate } from "react-router-dom";
-import { HiMenu } from "react-icons/Hi";
+import { Link } from "react-router-dom";
+import { HiMenu } from "react-icons/hi";
 
 export const Navbar = () => {
   return (
