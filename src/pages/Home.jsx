@@ -1,57 +1,49 @@
-import React, { useEffect, useState } from 'react'
-import { Card } from '../component/card'
-import Welcome from './Welcome'
-
-// import {Footer} from '../component/Footer'
-// import { Navbar } from './Navbar'
+import React, { useEffect, useState } from "react";
+import { Card } from "../component/card";
+import Welcome from "./Welcome";
+import { LuLoader } from "react-icons/lu";
 
 export const Home = () => {
-  const [posts, setPosts] = useState([])
-  useEffect(() =>{
-    // fetch("https://node-app-plsi.onrender.com/api/klab/blog/read")
-    //     .then((response) => response.json())
-    //     .then((res) => {
-    //       if(res.data){
-    //         setPosts(res.data)
-    //       }
-    //     })
-    //   }, [])
+  const [posts, setPosts] = useState([]);
 
-    const getAll = async()=>{
-      const response = await fetch("https://node-app-plsi.onrender.com/api/klab/blog/read");
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch(
+        "https://node-app-plsi.onrender.com/api/klab/blog/read"
+      );
       const res = await response.json();
-      setPosts(res.data)
-    }
+      setPosts(res.data);
+    };
     getAll();
-  },[])
+  }, []);
 
-  console.log("THIS MY POSTS", posts)
+  console.log("THIS MY POSTS", posts);
   return (
     <div>
-      
-      <section className='welcome-page'>
-      <Welcome/>
-
+      <section className="welcome-page">
+        <Welcome />
       </section>
-      {/* <section className='post-container'> */}
-       <div className='grid_container'> 
-      {posts.length > 0 ? posts.map((post, index) => (
-            <Card key={index} title={post.title} image={post.blogImage} author={post.author} content={post.content}/>
-          )): <p>is loading</p>
-      }
-      {/* <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/>
-      <Card/> */}
 
-
+      <div className="grid_container">
+        {posts.length > 0 ? (
+          posts.map((post, index) => (
+            <Card
+              key={index}
+              id={post._id}
+              title={post.title}
+              image={post.blogImage}
+              author={post.author}
+              content={post.content}
+              views={post.views}
+              Comment={post.Comment}
+            />
+          ))
+        ) : (
+          <p>
+            <LuLoader />
+          </p>
+        )}
       </div>
-      {/* </section> */}
-      
-      
-     
     </div>
-  )
-}
+  );
+};

@@ -1,32 +1,130 @@
-import React from 'react'
-import PostImage from '../assets/Bhpd8.jpg'
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { AiFillEye } from "react-icons/Ai";
+import { AiFillDelete } from "react-icons/Ai";
+import { AiTwotoneEdit } from "react-icons/Ai";
+
 const Readmore = () => {
+  const { _id } = useParams();
+  const [posts, setPosts] = useState([]);
+  const [commentData, setCommentData] = useState("");
+  // console.log("Comment", commentData);
+
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch(
+        `https://node-app-plsi.onrender.com/api/klab/blog/read/${_id}`
+      );
+      const res = await response.json();
+      setPosts(res.data);
+      // console.log("Comment", res.data.Comment); // Log the response to see its structure
+    };
+    getAll();
+  }, [_id]);
+  const Comments = posts.Comment;
+  console.log("Comment", Comments);
+  // const handleCommentChange = (e) => {
+  //   setCommentData({
+  //     ...commentData,
+  //     [e.target.name]: e.target.value,
+  //   });
+  // };
+
+  const token = localStorage.getItem("token");
+  console.log(_id);
+  console.log(token);
+  const handleCommentSubmit = (e) => {
+    e.preventDefault();
+    const data = {
+      content: commentData,
+    };
+    const response = fetch(
+      `https://node-app-plsi.onrender.com/api/klab/comment/create/${_id}`,
+      {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      }
+    )
+      .then((response) => {
+        if (response.ok) {
+          console.log("Comment added successfully!");
+          alert("success");
+          window.location.reload();
+        } else {
+          console.error("Failed to add comment");
+          alert("Failed");
+          window.location.reload();
+        }
+      })
+      .catch((error) => {
+        console.error("Error adding comment:", error);
+      });
+  };
+
   return (
     <div>
-    <div className='read-more-blog'>
-        <img src={PostImage} alt="post"  className='post-image-readmore'/>
-        <h1 className='heading'> The story of three lions in the darkness of Village!</h1>
-        <h2 className='publisher'>Sostene Skb - 20 Oct 2023 </h2>
-        
-        <p className='description'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam similique dolorem, sed natus exercitationem at harum placeat, explicabo totam dicta, atque rerum nesciunt doloremque aspernatur neque numquam itaque in voluptatibus!</p>
-       <p className='description'>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ab eos minima eius aspernatur eveniet voluptatem, fugiat recusandae, optio omnis animi cupiditate deserunt asperiores similique molestias ad? Explicabo porro esse culpa? Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minus, eos? Consequatur, suscipit sapiente quasi odit iusto voluptatum doloribus maxime, eum possimus architecto temporibus earum aliquam ab quod odio facilis fuga.</p>
-       
-       <div className='comment'>
-        <h1 className='add-comment'>Leave a Comment</h1>
-        <div className='drop-comment'>
-            <form action="#">
-            <input type="text" placeholder='Enter your name'  className='input-comment'/>
-            <input type="text" placeholder='Enter Your comment'  className='input-comment'/>
-            <button className='comment-button'>Comment</button>
-            </form>
+      <div className="read-more-blog">
+        <img src={posts.blogImage} alt="post" className="post-image-readmore" />
+        <h1 className="heading"> {posts.title}</h1>
+        <h2 className="publisher">{posts.author} </h2>
+        <p
+          className="description"
+          dangerouslySetInnerHTML={{ __html: posts.content }}
+        ></p>
 
+        <div className="views">
+          <AiFillEye className="view-icon" />
+          <span>{posts.views}</span>
         </div>
-        </div>
-    </div>
-    
-    </div>
-    
-  )
-}
 
-export default Readmore
+        <div className="comment">
+          <form onSubmit={handleCommentSubmit}>
+            <input
+              placeholder="Enter Your comment"
+              className="input-comment"
+              name="content"
+              value={commentData}
+              onChange={(e) => {
+                setCommentData(e.target.value);
+              }}
+              required
+            />
+            <button type="submit" className="comment-button">
+              Comment
+            </button>
+          </form>
+        </div>
+        <h2 className="comment-heading">Added Comments</h2>
+
+        {Comments &&
+          Comments.map((comment) => (
+            <div className="added-comments">
+              <div className="edit-delete">
+                <AiFillDelete className="delete-icon-comment" />
+                <AiTwotoneEdit className="edit-icon-comment" />
+              </div>
+              <div className="comment-profile-name">
+                <img
+                  src={comment.blogCommentor.profile}
+                  alt=""
+                  className="comment-image"
+                />
+                <h2 className="comment-name">
+                  @{comment.blogCommentor.firstname}{" "}
+                  {comment.blogCommentor.lastname}
+                </h2>
+              </div>
+
+              <p className="comment-content">{comment.content}</p>
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+};
+
+export default Readmore;
