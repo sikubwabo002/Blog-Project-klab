@@ -1,7 +1,7 @@
 import React from "react";
-// import { BsFacebook } from "react-icons/Bs";
-// import { BiLogoInstagramAlt } from "react-icons/Bi";
-// import { BsYoutube } from "react-icons/Bs";
+import { BsFacebook } from "react-icons/Bs";
+import { BiLogoInstagramAlt } from "react-icons/Bi";
+import { BsYoutube } from "react-icons/Bs";
 // import {HiMenu} from "react-icons/Hi"
 export const Footer = () => {
   return (
@@ -12,9 +12,9 @@ export const Footer = () => {
 
       <div className="right-footer">
         <i>
-          {/* <BsFacebook className="icons-footer" />
+          <BsFacebook className="icons-footer" />
           <BiLogoInstagramAlt className="icons-footer" />
-          <BsYoutube className="icons-footer" /> */}
+          <BsYoutube className="icons-footer" />
         </i>
       </div>
     </div>
