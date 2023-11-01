@@ -11,6 +11,9 @@ import { BiSolidBarChartSquare } from "react-icons/Bi";
 import { FaComments } from "react-icons/Fa";
 
 const Dashboard = () => {
+  const [commentData, setCommentData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/Signin");
@@ -39,7 +42,7 @@ const Dashboard = () => {
     formData.append("content", post.content);
 
     const apiKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQxMjRkYzg3YTk2ZjI0NmY3YzcyNSIsImlhdCI6MTY5ODczNzAxMywiZXhwIjoxNjk4ODIzNDEzfQ.BdodRsQL0n64Qd7jWF1_xih9vmpho8teeIDxDSiRlWU"; // Replace with your API key
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQxMjRkYzg3YTk2ZjI0NmY3YzcyNSIsImlhdCI6MTY5ODg0ODQ4NywiZXhwIjoxNjk4OTM0ODg3fQ.ou7pRR4D5k11HQtx9TBe2Itk45_56kMr5hzMvy3aMLs"; // Replace with your API key
 
     axios
       .post(
@@ -60,9 +63,53 @@ const Dashboard = () => {
       .catch((error) => {
         console.error(error);
         alert("Failed to upload");
-        window.location.reload();
+        // window.location.reload();
       });
   }
+
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch(
+        "https://node-app-plsi.onrender.com/api/klab/blog/read"
+      );
+      const res = await response.json();
+      setPosts(res.data);
+    };
+    getAll();
+
+    // Fetch total users
+
+    fetch("https://node-app-plsi.onrender.com/api/klab/user/read")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("users", data);
+        setUserData(data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching posts:", error);
+      });
+
+    // Fetch total comments
+    fetch("https://node-app-plsi.onrender.com/api/klab/comment/read")
+      .then((response) => response.json())
+      .then((data) => {
+        // console.log("comments", data);
+        setCommentData(data.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching comments:", error);
+      });
+  }, []);
+
+  console.log("THIS MY POSTS", posts);
+  const numberOfPosts = posts.length;
+
+  const commentLength = commentData.length;
+  console.log("comment", commentLength);
+
+  const userNumber = userData.length;
+  console.log("users", userNumber);
 
   return (
     <div className="dashboard-all-div">
@@ -97,7 +144,8 @@ const Dashboard = () => {
         <div className="number-users">
           <i className="icons-i">
             <FaUsers className="user-icon" />
-            Number of Users :
+            Number of Users
+            <span className="post-number">{userNumber}</span>
           </i>
         </div>
 
@@ -105,6 +153,7 @@ const Dashboard = () => {
           <i className="icons-i">
             <FaComments className="user-icon" />
             Number of Comments :
+            <span className="post-number">{commentLength}</span>
           </i>
         </div>
 
@@ -113,7 +162,8 @@ const Dashboard = () => {
             <BsFillPostcardHeartFill className="user-icon" />
             <span className="icons-i">
               {" "}
-              Number of Posts: <span className="post-number">8</span>
+              Number of Posts:{" "}
+              <span className="post-number">{numberOfPosts}</span>
             </span>
           </i>
         </div>

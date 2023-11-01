@@ -115,6 +115,21 @@ export default function LineCharts() {
     },
   ];
 
+  const [posts, setPosts] = useState([]);
+  useEffect(() => {
+    const getAll = async () => {
+      const response = await fetch(
+        "https://node-app-plsi.onrender.com/api/klab/blog/read"
+      );
+      const res = await response.json();
+      setPosts(res.data);
+    };
+    getAll();
+  }, []);
+
+  console.log("THIS MY POSTS", posts);
+  const numberOfPosts = posts.length;
+
   return (
     <div className="dashboard-all-div">
       <div className="numbers">
@@ -148,14 +163,16 @@ export default function LineCharts() {
         <div className="number-users">
           <i className="icons-i">
             <FaUsers className="user-icon" />
-            Number of Users :
+            Number of Users
+            <span className="post-number">{userNumber}</span>
           </i>
         </div>
 
         <div className="number-users">
           <i className="icons-i">
             <FaComments className="user-icon" />
-            Number of Comments :
+            Number of Comments
+            <span className="post-number">{commentLength}</span>
           </i>
         </div>
 
@@ -164,7 +181,8 @@ export default function LineCharts() {
             <BsFillPostcardHeartFill className="user-icon" />
             <span className="icons-i">
               {" "}
-              Number of Posts: <span className="post-number">yes</span>
+              Number of Posts{" "}
+              <span className="post-number">{numberOfPosts}</span>
             </span>
           </i>
         </div>

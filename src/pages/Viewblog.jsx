@@ -14,6 +14,9 @@ import { FaComments } from "react-icons/Fa";
 // import { Card } from '../component/card'
 
 const Viewblog = () => {
+  const [commentData, setCommentData] = useState([]);
+  const [userData, setUserData] = useState([]);
+
   useEffect(() => {
     if (!localStorage.getItem("token")) {
       navigate("/Signin");
@@ -33,8 +36,37 @@ const Viewblog = () => {
     getAll();
   }, []);
 
+  // Fetch total users
+
+  fetch("https://node-app-plsi.onrender.com/api/klab/user/read")
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("users", data);
+      setUserData(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching posts:", error);
+    });
+
+  // Fetch total comments
+  fetch("https://node-app-plsi.onrender.com/api/klab/comment/read")
+    .then((response) => response.json())
+    .then((data) => {
+      // console.log("comments", data);
+      setCommentData(data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching comments:", error);
+    });
+
   console.log("THIS MY POSTS", posts);
   const numberOfPosts = posts.length;
+
+  const userNumber = userData.length;
+  console.log("users", userNumber);
+
+  const commentLength = commentData.length;
+  console.log("comment", commentLength);
 
   return (
     <div className="dashboard-all-div">
@@ -67,14 +99,15 @@ const Viewblog = () => {
         <div className="number-users">
           <i className="icons-i">
             <FaUsers className="user-icon" />
-            Number of Users :
+            Number of Users<span className="post-number">{userNumber}</span>
           </i>
         </div>
 
         <div className="number-users">
           <i className="icons-i">
             <FaComments className="user-icon" />
-            Number of Comments :
+            Number of Comments
+            <span className="post-number">{commentLength}</span>
           </i>
         </div>
 
@@ -83,7 +116,7 @@ const Viewblog = () => {
             <BsFillPostcardHeartFill className="user-icon" />
             <span className="icons-i">
               {" "}
-              Number of Posts:{" "}
+              Number of Posts
               <span className="post-number">{numberOfPosts}</span>
             </span>
           </i>

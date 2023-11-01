@@ -31,6 +31,7 @@ const Dashboardcard = ({ id, image, title, content, author, views }) => {
       )
       .then(() => {
         alert("Post updated!");
+        window.location.reload();
         setIsEditing(false);
       })
       .catch((error) => {
