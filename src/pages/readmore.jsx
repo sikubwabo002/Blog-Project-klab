@@ -3,8 +3,9 @@ import { useParams } from "react-router-dom";
 import { AiFillEye } from "react-icons/Ai";
 import { AiFillDelete } from "react-icons/Ai";
 import { AiTwotoneEdit } from "react-icons/Ai";
+import axios from "axios";
 
-const Readmore = () => {
+const Readmore = (id) => {
   const { _id } = useParams();
   const [posts, setPosts] = useState([]);
   const [commentData, setCommentData] = useState("");
@@ -50,20 +51,36 @@ const Readmore = () => {
       }
     )
       .then((response) => {
+        console.log(response);
         if (response.ok) {
           console.log("Comment added successfully!");
-          alert("success");
+          alert("Thanks for commenting");
           window.location.reload();
         } else {
           console.error("Failed to add comment");
           alert("Failed");
-          window.location.reload();
         }
       })
       .catch((error) => {
         console.error("Error adding comment:", error);
       });
   };
+
+  function deleteRecord(id) {
+    axios
+      .delete(
+        `https://node-app-plsi.onrender.com/api/klab/comment/delete/${id}`
+      )
+      .then(() => {
+        alert("comment Deleted");
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.error("Error deleting data: ", error);
+        alert("Failed to delete comment");
+        // window.location.reload();
+      });
+  }
 
   return (
     <div>
@@ -102,10 +119,13 @@ const Readmore = () => {
 
         {Comments &&
           Comments.map((comment) => (
-            <div className="added-comments">
+            <div className="added-comments" key={comment.id}>
               <div className="edit-delete">
-                <AiFillDelete className="delete-icon-comment" />
-                <AiTwotoneEdit className="edit-icon-comment" />
+                <AiFillDelete
+                  className="delete-icon-comment"
+                  onClick={deleteRecord}
+                />
+                {/* <AiTwotoneEdit className="edit-icon-comment" /> */}
               </div>
               <div className="comment-profile-name">
                 <img

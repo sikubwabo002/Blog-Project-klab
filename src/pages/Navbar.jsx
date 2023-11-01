@@ -18,6 +18,7 @@ export const Navbar = () => {
           {" "}
           CONTACT US
         </Link>
+
         <Link to="/Signin" className="lists">
           SIGN IN
         </Link>
@@ -37,6 +38,7 @@ export const Navbar = () => {
             {" "}
             CONTACT US
           </Link>
+
           <Link to="/Signin" className="phone-menu">
             SIGN IN
           </Link>

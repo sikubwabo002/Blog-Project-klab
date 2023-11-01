@@ -28,9 +28,10 @@ const Signin = () => {
         if (role === "admin") {
           alert("Welcome Admin");
           localStorage.setItem("token", response.data.token);
-          navigate("/dashboard");
+          navigate("/Viewblog");
         } else {
           alert("Welcome User");
+          localStorage.setItem("token", response.data.token);
           navigate("/");
         }
       })

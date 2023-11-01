@@ -9,6 +9,7 @@ import Signup from "./pages/Signup";
 import Dashboard from "./pages/dashboard";
 import Readmore from "./pages/readmore";
 import Viewblog from "./pages/Viewblog";
+import LineCharts from "./component/LineCharts";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/About" element={<Aboutus />} />
             <Route path="/Contact" element={<Contact />} />
+            <Route path="/Linecharts" element={<LineCharts />} />
             <Route path="/Signin" element={<Signin />} />
             <Route path="/Signup" element={<Signup />} />
             <Route path="/dashboard" element={<Dashboard />} />

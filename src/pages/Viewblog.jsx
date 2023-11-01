@@ -7,6 +7,9 @@ import { FaUsers } from "react-icons/Fa";
 import { BsFillPostcardHeartFill } from "react-icons/Bs";
 import { AiFillFolderAdd } from "react-icons/Ai";
 import { BiSolidLogOut } from "react-icons/Bi";
+import { BiSolidDashboard } from "react-icons/Bi";
+import { BiSolidBarChartSquare } from "react-icons/Bi";
+import { FaComments } from "react-icons/Fa";
 
 // import { Card } from '../component/card'
 
@@ -32,24 +35,26 @@ const Viewblog = () => {
 
   console.log("THIS MY POSTS", posts);
   const numberOfPosts = posts.length;
-  return (
-    <div>
-      <div className="add-blog-button">
-        {/* <button className="publish-button-dashboard">
-          <Link to="/dashboard">Add Post</Link>
-        </button> */}
-        {/* <button
-          className="logout-viewblog"
-          onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/Signin");
-          }}
-        >
-          SIGN OUT
-        </button> */}
-      </div>
 
+  return (
+    <div className="dashboard-all-div">
       <div className="numbers">
+        <div className="number-dashboard">
+          <i className="icons-i-dashboard">
+            <BiSolidDashboard className="user-icon-dashboard" />
+            DashBoard
+          </i>
+        </div>
+
+        <div className="number-users">
+          <Link to="/LineCharts">
+            <i className="icons-i">
+              <BiSolidBarChartSquare className="user-icon" />
+              Analytics
+            </i>
+          </Link>
+        </div>
+
         <div className="number-users">
           <Link to="/dashboard">
             <i className="icons-i">
@@ -62,14 +67,21 @@ const Viewblog = () => {
         <div className="number-users">
           <i className="icons-i">
             <FaUsers className="user-icon" />
-            Number of Users
+            Number of Users :
           </i>
         </div>
 
-        <div className="icon-container">
+        <div className="number-users">
           <i className="icons-i">
-            <BsFillPostcardHeartFill className="post-icon" />
-            <span className="icon-text">
+            <FaComments className="user-icon" />
+            Number of Comments :
+          </i>
+        </div>
+
+        <div className="number-users">
+          <i className="icons-i">
+            <BsFillPostcardHeartFill className="user-icon" />
+            <span className="icons-i">
               {" "}
               Number of Posts:{" "}
               <span className="post-number">{numberOfPosts}</span>
@@ -101,7 +113,7 @@ const Viewblog = () => {
               image={post.blogImage}
               author={post.author}
               content={post.content}
-              views
+              views={post.views}
             />
           ))
         ) : (

@@ -3,6 +3,12 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { BsFillPostcardHeartFill } from "react-icons/Bs";
+import { FaUsers } from "react-icons/Fa";
+import { AiFillFolderAdd } from "react-icons/Ai";
+import { BiSolidLogOut } from "react-icons/Bi";
+import { BiSolidDashboard } from "react-icons/Bi";
+import { BiSolidBarChartSquare } from "react-icons/Bi";
+import { FaComments } from "react-icons/Fa";
 
 const Dashboard = () => {
   useEffect(() => {
@@ -33,7 +39,7 @@ const Dashboard = () => {
     formData.append("content", post.content);
 
     const apiKey =
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzU3YWVjYzRkNmYxYmVjODhlMTM5ZiIsImlhdCI6MTY5ODY0OTE3NiwiZXhwIjoxNjk4NzM1NTc2fQ.4ALXwbLEzvAE4WF0D2O_1xO9CdJGrWOVddx932CbI0c"; // Replace with your API key
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzQxMjRkYzg3YTk2ZjI0NmY3YzcyNSIsImlhdCI6MTY5ODczNzAxMywiZXhwIjoxNjk4ODIzNDEzfQ.BdodRsQL0n64Qd7jWF1_xih9vmpho8teeIDxDSiRlWU"; // Replace with your API key
 
     axios
       .post(
@@ -49,8 +55,6 @@ const Dashboard = () => {
       .then((response) => {
         console.log(response);
         alert("Uploaded successfully");
-        window.location.reload();
-
         navigate("/Viewblog");
       })
       .catch((error) => {
@@ -61,24 +65,74 @@ const Dashboard = () => {
   }
 
   return (
-    <>
-      <div className="add-blog-button">
-        <button className="publish-button-dashboard">
-          <Link to="/Viewblog">View Posts</Link>
-        </button>
-        <button
-          className="logout-viewblog"
-          onClick={() => {
-            localStorage.removeItem("token");
-            navigate("/Signin");
-          }}
-        >
-          SIGN OUT
-        </button>
-      </div>
+    <div className="dashboard-all-div">
+      <div className="numbers">
+        <div className="number-dashboard">
+          <Link to="/Viewblog">
+            <i className="icons-i-dashboard">
+              <BiSolidDashboard className="user-icon-dashboard" />
+              DashBoard
+            </i>
+          </Link>
+        </div>
 
+        <div className="number-users">
+          <Link to="/LineCharts">
+            <i className="icons-i">
+              <BiSolidBarChartSquare className="user-icon" />
+              Analytics
+            </i>
+          </Link>
+        </div>
+
+        <div className="number-users">
+          <Link to="/dashboard">
+            <i className="icons-i">
+              <AiFillFolderAdd className="user-icon" />
+              Add Post
+            </i>
+          </Link>
+        </div>
+
+        <div className="number-users">
+          <i className="icons-i">
+            <FaUsers className="user-icon" />
+            Number of Users :
+          </i>
+        </div>
+
+        <div className="number-users">
+          <i className="icons-i">
+            <FaComments className="user-icon" />
+            Number of Comments :
+          </i>
+        </div>
+
+        <div className="number-users">
+          <i className="icons-i">
+            <BsFillPostcardHeartFill className="user-icon" />
+            <span className="icons-i">
+              {" "}
+              Number of Posts: <span className="post-number">8</span>
+            </span>
+          </i>
+        </div>
+
+        <div className="number-users">
+          <i className="icons-i">
+            <BiSolidLogOut
+              className="user-icon"
+              onClick={() => {
+                localStorage.removeItem("token");
+                navigate("/Signin");
+              }}
+            />
+            LogOut
+          </i>
+        </div>
+      </div>
       <div className="dashboard">
-        <h6 className="login-here">DASHBOARD</h6>
+        <h6 className="login-here">ADD POST</h6>
         <form action="#" className="form-dashboard" onSubmit={handleSubmit}>
           <label className="choose-an-image"> Choose an Image</label>
 
@@ -97,7 +151,7 @@ const Dashboard = () => {
             className="input-dashboard"
             onChange={handleInput}
           />
-          <input
+          <textarea
             type="text"
             name="content"
             placeholder="Enter Description"
@@ -107,9 +161,8 @@ const Dashboard = () => {
           <button className="publish-button-dashboard">Add Blog</button>
         </form>
       </div>
-    </>
+    </div>
   );
 };
-// eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1MzU3YWVjYzRkNmYxYmVjODhlMTM5ZiIsImlhdCI6MTY5ODAwMzgzOCwiZXhwIjoxNjk4MDkwMjM4fQ.W5hA1-GTeCE_69T0tmeAGPdiQeTVvl6Zn_i7Pj_4Cfw
 
 export default Dashboard;

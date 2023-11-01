@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const Dashboardcard = ({ id, image, title, content, author }) => {
+const Dashboardcard = ({ id, image, title, content, author, views }) => {
   const navigate = useNavigate();
   const [isEditing, setIsEditing] = useState(false);
   const [editedTitle, setEditedTitle] = useState(title);
@@ -56,6 +56,7 @@ const Dashboardcard = ({ id, image, title, content, author }) => {
   return (
     <div>
       <div className="dashboard-card">
+        <p>{views}</p>
         {isEditing ? (
           <input
             type="file"
