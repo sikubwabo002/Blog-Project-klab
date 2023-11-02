@@ -87,7 +87,7 @@ const Readmore = (id) => {
       <div className="read-more-blog">
         <img src={posts.blogImage} alt="post" className="post-image-readmore" />
         <h1 className="heading"> {posts.title}</h1>
-        <h2 className="publisher">{posts.author} </h2>
+
         <p
           className="description"
           dangerouslySetInnerHTML={{ __html: posts.content }}

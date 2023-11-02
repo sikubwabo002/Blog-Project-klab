@@ -9,6 +9,8 @@ import { BiSolidLogOut } from "react-icons/Bi";
 import { BiSolidDashboard } from "react-icons/Bi";
 import { BiSolidBarChartSquare } from "react-icons/Bi";
 import { FaComments } from "react-icons/Fa";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Dashboard = () => {
   const [commentData, setCommentData] = useState([]);
@@ -57,8 +59,10 @@ const Dashboard = () => {
       )
       .then((response) => {
         console.log(response);
-        alert("Uploaded successfully");
-        navigate("/Viewblog");
+        toast("Uploaded successfully");
+        setTimeout(() => {
+          navigate("/Viewblog");
+        }, 2000);
       })
       .catch((error) => {
         console.error(error);
@@ -113,6 +117,9 @@ const Dashboard = () => {
 
   return (
     <div className="dashboard-all-div">
+      <div>
+        <ToastContainer />
+      </div>
       <div className="numbers">
         <div className="number-dashboard">
           <Link to="/Viewblog">

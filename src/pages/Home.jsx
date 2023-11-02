@@ -18,6 +18,7 @@ export const Home = () => {
   }, []);
 
   console.log("THIS MY POSTS", posts);
+
   return (
     <div>
       <section className="welcome-page">
@@ -32,10 +33,12 @@ export const Home = () => {
               id={post._id}
               title={post.title}
               image={post.blogImage}
-              author={post.author}
+              firstname={post.user.firstname}
+              lastname={post.user.lastname}
               content={post.content}
               views={post.views}
               Comment={post.Comment}
+              profile={post.user.profile}
             />
           ))
         ) : (

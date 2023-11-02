@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import toast, { Toaster } from "react-hot-toast";
 
 const Dashboardcard = ({ id, image, title, content, author, views }) => {
   const navigate = useNavigate();
@@ -44,18 +45,22 @@ const Dashboardcard = ({ id, image, title, content, author, views }) => {
     axios
       .delete(`https://node-app-plsi.onrender.com/api/klab/blog/delete/${id}`)
       .then(() => {
-        alert("Post Deleted");
+        toast.success("Successfully deleted!");
+        // alert("Post Deleted");
         window.location.reload();
       })
       .catch((error) => {
         console.error("Error deleting data: ", error);
         alert("Failed to delete Post");
-        window.location.reload();
+        // window.location.reload();
       });
   }
 
   return (
     <div>
+      <div>
+        <Toaster />
+      </div>
       <div className="dashboard-card">
         <p>{views}</p>
         {isEditing ? (

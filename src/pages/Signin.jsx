@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Signin = () => {
   const navigate = useNavigate();
@@ -26,9 +28,11 @@ const Signin = () => {
         console.log("role", response.data?.users.role);
 
         if (role === "admin") {
-          alert("Welcome Admin");
+          toast("Welcome Admin");
           localStorage.setItem("token", response.data.token);
-          navigate("/Viewblog");
+          setTimeout(() => {
+            navigate("/Viewblog");
+          }, 2000); // Navigate after showing the success message for 1 second
         } else {
           alert("Welcome User");
           localStorage.setItem("token", response.data.token);
@@ -43,6 +47,9 @@ const Signin = () => {
 
   return (
     <div className="sign-in">
+      <div>
+        <ToastContainer />
+      </div>
       <h6 className="login-here">LOGIN HERE</h6>
       <form action="#" className="login-form">
         <input

@@ -848,6 +848,19 @@ td {
 
   font-family: montserrat;
 }
+.profile-image-readmore {
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
+.image-and-author {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+}
 
 /* .delete-update{
     
