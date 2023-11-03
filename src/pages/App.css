@@ -408,12 +408,9 @@ body {
   height: 80px;
   display: flex;
   flex-direction: row;
+  bottom: 0;
 }
 .left-footer {
-  /* display: grid; */
-  /* grid-template-columns: auto auto; */
-  /* flex-direction: column; */
-
   background-color: #202020;
   width: 50%;
   height: 80px;
@@ -422,9 +419,6 @@ body {
   align-items: center;
 }
 .right-footer {
-  /* display: grid; */
-  /* grid-template-columns: auto auto; */
-  /* flex-direction: column; */
   background-color: #202020;
   width: 50%;
   height: 80px;
