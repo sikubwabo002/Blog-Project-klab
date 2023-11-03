@@ -6,7 +6,7 @@ export const Card = ({ id, image, title, content, firstname, lastname }) => {
   return (
     <div className="post">
       <img src={image} alt="post" className="post-image" />
-      <h1 className="heading">{title}</h1>
+      <h1 className="heading">{title.substring(0, 50)}</h1>
       <h2 className="publisher">
         {firstname} {lastname}{" "}
       </h2>
