@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { AiFillEye } from "react-icons/Ai";
-import { AiFillDelete } from "react-icons/Ai";
-import { AiTwotoneEdit } from "react-icons/Ai";
+import { AiFillEye } from "react-icons/ai";
+import { AiFillDelete } from "react-icons/ai";
+import { AiTwotoneEdit } from "react-icons/ai";
 import axios from "axios";
 
 const Readmore = (id) => {

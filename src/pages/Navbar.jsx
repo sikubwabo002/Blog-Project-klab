@@ -6,7 +6,9 @@ import { HiMenu } from "react-icons/hi";
 export const Navbar = () => {
   return (
     <div className="navbar">
-      <h2 className="logo">SOSTENE</h2>
+      <Link to="/">
+        <h2 className="logo">SOSTENE</h2>
+      </Link>
       <ul className="ul-class">
         <Link to="/" className="lists">
           HOME

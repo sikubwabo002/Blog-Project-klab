@@ -1,7 +1,7 @@
 import React from "react";
-import { BsFacebook } from "react-icons/Bs";
-import { BiLogoInstagramAlt } from "react-icons/Bi";
-import { BsYoutube } from "react-icons/Bs";
+import { BsFacebook } from "react-icons/bs";
+import { BiLogoInstagramAlt } from "react-icons/bi";
+import { BsYoutube } from "react-icons/bs";
 // import {HiMenu} from "react-icons/Hi"
 export const Footer = () => {
   return (

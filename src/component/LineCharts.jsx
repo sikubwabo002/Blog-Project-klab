@@ -15,13 +15,13 @@ import {
   AreaChart,
   Area,
 } from "recharts";
-import { FaUsers } from "react-icons/Fa";
-import { BsFillPostcardHeartFill } from "react-icons/Bs";
-import { AiFillFolderAdd } from "react-icons/Ai";
-import { BiSolidLogOut } from "react-icons/Bi";
-import { BiSolidDashboard } from "react-icons/Bi";
-import { BiSolidBarChartSquare } from "react-icons/Bi";
-import { FaComments } from "react-icons/Fa";
+import { FaUsers } from "react-icons/fa";
+import { BsFillPostcardHeartFill } from "react-icons/bs";
+import { AiFillFolderAdd } from "react-icons/ai";
+import { BiSolidLogOut } from "react-icons/bi";
+import { BiSolidDashboard } from "react-icons/bi";
+import { BiSolidBarChartSquare } from "react-icons/bi";
+import { FaComments } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function LineCharts() {
