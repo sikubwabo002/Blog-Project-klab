@@ -21,7 +21,7 @@ import { AiFillFolderAdd } from "react-icons/ai";
 import { BiSolidLogOut } from "react-icons/bi";
 import { BiSolidDashboard } from "react-icons/bi";
 import { BiSolidBarChartSquare } from "react-icons/bi";
-import { FaComments } from "react-icons/ba";
+import { FaComments } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function LineCharts() {
